@@ -14,7 +14,9 @@ export default function addevent() {
 function Content() {
   return (
     <>
-      <div className='container'></div>
+      <div className='container'>
+        <div className='row'></div>
+      </div>
     </>
   );
 }
