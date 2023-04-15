@@ -1,6 +1,10 @@
 import Sidebar from '@/components/Sidebar';
 import styles from '@/styles/Home.module.css';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+  PlusOutlined,
+  UploadOutlined,
+  MinusCircleOutlined,
+} from '@ant-design/icons';
 import {
   Button,
   Cascader,
@@ -111,6 +115,77 @@ function Content() {
                     <Form.Item>
                       <Checkbox>This is a trending event</Checkbox>
                     </Form.Item>
+                  </Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col span={8}>
+                    <b>Ticket Details</b>
+                  </Col>
+                  <Col span={16}>
+                    <Row>
+                      <Col span={8}>
+                        <Form.List name='users'>
+                          {(fields, { add, remove }) => (
+                            <>
+                              {fields.map(({ key, name, ...restField }) => (
+                                <Space
+                                  key={key}
+                                  style={{
+                                    display: 'flex',
+                                    marginBottom: 8,
+                                  }}
+                                  align='baseline'
+                                >
+                                  <Form.Item
+                                    {...restField}
+                                    name={[name, 'first']}
+                                    rules={[
+                                      {
+                                        required: true,
+                                        message: 'Missing first name',
+                                      },
+                                    ]}
+                                  >
+                                    <Input placeholder='First Name' />
+                                  </Form.Item>
+                                  <Form.Item
+                                    {...restField}
+                                    name={[name, 'last']}
+                                    rules={[
+                                      {
+                                        required: true,
+                                        message: 'Missing last name',
+                                      },
+                                    ]}
+                                  >
+                                    <Input placeholder='Last Name' />
+                                  </Form.Item>
+                                  <MinusCircleOutlined
+                                    onClick={() => remove(name)}
+                                  />
+                                </Space>
+                              ))}
+                              <Form.Item>
+                                <Button
+                                  type='dashed'
+                                  onClick={() => add()}
+                                  block
+                                  icon={<PlusOutlined />}
+                                >
+                                  Add field
+                                </Button>
+                              </Form.Item>
+                            </>
+                          )}
+                        </Form.List>
+                        <Form.Item>
+                          <Button type='primary' htmlType='submit'>
+                            Submit
+                          </Button>
+                        </Form.Item>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
               </Form>
